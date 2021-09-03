@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/PostsListFragment">
+
+    <fragment
+        android:id="@+id/PostsListFragment"
+        android:name="com.example.postdetailssample.view.postlist.PostsListFragment"
+        android:label="@string/posts_list_fragment"
+        tools:layout="@layout/fragment_posts_list">
+
+        <action
+            android:id="@+id/action_list_to_details"
+            app:destination="@id/PostDetailsFragment">
+
+            <argument
+                android:name="postId"
+                android:defaultValue="-1"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/PostDetailsFragment"
+        android:name="com.example.postdetailssample.view.postdetails.PostDetailsFragment"
+        android:label="@string/post_details_fragment"
+        tools:layout="@layout/fragment_post_details">
+
+        <action
+            android:id="@+id/action_details_to_list"
+            app:destination="@id/PostsListFragment" />
+    </fragment>
+</navigation>
