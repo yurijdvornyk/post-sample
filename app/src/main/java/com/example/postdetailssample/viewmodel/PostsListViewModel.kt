@@ -5,14 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.postdetailssample.model.SamplePost
 import com.example.postdetailssample.repository.PostsRepository
+import com.example.postdetailssample.repository.RemotePostsRepository
+import com.example.postdetailssample.repository.RemoteUserRepository
+import com.example.postdetailssample.repository.local.LocalPostsRepository
+import com.example.postdetailssample.repository.local.LocalUserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class PostsViewModel @Inject constructor(
-    private val repository: PostsRepository
+class PostsListViewModel @Inject constructor(
+    private val remotePostsRepository: RemotePostsRepository,
+    private val localPostsRepository: LocalPostsRepository
 ) : BaseViewModel() {
 
     val postsData: LiveData<List<SamplePost>>
@@ -21,11 +27,14 @@ class PostsViewModel @Inject constructor(
     private val internalPostsData = MutableLiveData<List<SamplePost>>()
 
     fun loadPosts() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                internalPostsData.postValue(repository.loadPosts())
+                localPostsRepository.savePosts(remotePostsRepository.loadPosts())
             } catch (e: Exception) {
                 internalErrorMessageData.postValue(e.message)
+            } finally {
+                val posts = localPostsRepository.loadPosts()
+                internalPostsData.postValue(posts)
             }
         }
     }

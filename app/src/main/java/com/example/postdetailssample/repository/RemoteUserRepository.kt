@@ -1,7 +1,7 @@
 package com.example.postdetailssample.repository
 
 import com.example.postdetailssample.model.SampleUser
-import com.example.postdetailssample.service.ApiService
+import com.example.postdetailssample.service.remote.ApiService
 import javax.inject.Inject
 
 class RemoteUserRepository @Inject constructor(
@@ -10,5 +10,8 @@ class RemoteUserRepository @Inject constructor(
 
     override suspend fun loadUserDetails(id: Int): SampleUser {
         return ApiResponseHandler.process(apiService.loadUserDetails(id))
+    }
+
+    override suspend fun saveUserDetails(user: SampleUser) {
     }
 }

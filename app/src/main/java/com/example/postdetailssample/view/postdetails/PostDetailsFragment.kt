@@ -47,6 +47,7 @@ class PostDetailsFragment : BaseFragment<PostDetailsViewModel>() {
         viewBinding.noContentText.visibility = View.VISIBLE
         viewBinding.postTitleText.visibility = View.GONE
         viewBinding.postBodyText.visibility = View.GONE
+        viewBinding.refreshLayout.isRefreshing = false
     }
 
     private fun setUpDataObservers() {

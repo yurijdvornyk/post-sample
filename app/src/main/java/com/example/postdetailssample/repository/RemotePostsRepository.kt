@@ -1,8 +1,7 @@
 package com.example.postdetailssample.repository
 
 import com.example.postdetailssample.model.SamplePost
-import com.example.postdetailssample.service.ApiService
-import com.example.postdetailssample.service.ApiServiceImpl
+import com.example.postdetailssample.service.remote.ApiService
 import javax.inject.Inject
 
 class RemotePostsRepository @Inject constructor(
@@ -13,7 +12,10 @@ class RemotePostsRepository @Inject constructor(
         return ApiResponseHandler.process(apiService.loadPosts())
     }
 
-    override suspend fun loadPostDetails(id: Int): SamplePost {
-        return ApiResponseHandler.process(apiService.loadPostDetails(id))
+    override suspend fun loadPostDetails(postId: Int): SamplePost {
+        return ApiResponseHandler.process(apiService.loadPostDetails(postId))
+    }
+
+    override suspend fun savePosts(posts: List<SamplePost>) {
     }
 }

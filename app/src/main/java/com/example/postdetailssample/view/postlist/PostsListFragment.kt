@@ -12,15 +12,15 @@ import com.example.postdetailssample.R
 import com.example.postdetailssample.databinding.FragmentPostsListBinding
 import com.example.postdetailssample.view.BaseFragment
 import com.example.postdetailssample.view.postdetails.PostDetailsFragment
-import com.example.postdetailssample.viewmodel.PostsViewModel
+import com.example.postdetailssample.viewmodel.PostsListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PostsListFragment : BaseFragment<PostsViewModel>() {
+class PostsListFragment : BaseFragment<PostsListViewModel>() {
 
     private lateinit var viewBinding: FragmentPostsListBinding
 
-    override val viewModel: PostsViewModel by viewModels()
+    override val viewModel: PostsListViewModel by viewModels()
 
     private val postsAdapter = PostsAdapter {
         findNavController().navigate(
@@ -50,6 +50,7 @@ class PostsListFragment : BaseFragment<PostsViewModel>() {
         viewBinding.loader.visibility = View.GONE
         viewBinding.postsRecycler.visibility = View.GONE
         viewBinding.noContentText.visibility = View.VISIBLE
+        viewBinding.refreshLayout.isRefreshing = false
     }
 
     override fun retry() {
@@ -76,8 +77,12 @@ class PostsListFragment : BaseFragment<PostsViewModel>() {
         viewModel.postsData.observe(viewLifecycleOwner) {
             viewBinding.loader.visibility = View.GONE
             viewBinding.postsRecycler.visibility = View.VISIBLE
-            viewBinding.noContentText.visibility = View.GONE
             viewBinding.refreshLayout.isRefreshing = false
+            viewBinding.noContentText.visibility = if (it?.isEmpty() == true) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
             it?.let { posts ->
                 postsAdapter.items = posts
             }

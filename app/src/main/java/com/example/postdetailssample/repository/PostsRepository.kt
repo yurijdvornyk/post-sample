@@ -6,5 +6,7 @@ interface PostsRepository {
 
     suspend fun loadPosts(): List<SamplePost>
 
-    suspend fun loadPostDetails(id: Int): SamplePost
+    suspend fun loadPostDetails(postId: Int): SamplePost
+
+    suspend fun savePosts(posts: List<SamplePost>)
 }

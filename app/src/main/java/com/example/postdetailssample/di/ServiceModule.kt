@@ -1,11 +1,14 @@
 package com.example.postdetailssample.di
 
-import com.example.postdetailssample.service.ApiService
-import com.example.postdetailssample.service.ApiServiceImpl
+import android.content.Context
+import com.example.postdetailssample.service.remote.ApiService
+import com.example.postdetailssample.service.remote.ApiServiceImpl
+import com.example.postdetailssample.service.local.DatabaseService
+import com.example.postdetailssample.service.local.DatabaseServiceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -17,5 +20,11 @@ object ServiceModule {
     @Provides
     fun provideApiService(): ApiService {
         return ApiServiceImpl()
+    }
+
+    @Singleton
+    @Provides
+    fun provideDatabaseService(@ApplicationContext context: Context): DatabaseService {
+        return DatabaseServiceImpl(context)
     }
 }

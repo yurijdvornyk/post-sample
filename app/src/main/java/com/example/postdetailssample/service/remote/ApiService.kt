@@ -1,4 +1,4 @@
-package com.example.postdetailssample.service
+package com.example.postdetailssample.service.remote
 
 import com.example.postdetailssample.model.SamplePost
 import com.example.postdetailssample.model.SampleUser
