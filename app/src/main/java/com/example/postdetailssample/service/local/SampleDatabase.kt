@@ -13,7 +13,6 @@ import com.example.postdetailssample.service.local.dao.UserDao
     ],
     version = 1
 )
-
 abstract class SampleDatabase : RoomDatabase() {
 
     abstract fun postDao(): PostDao

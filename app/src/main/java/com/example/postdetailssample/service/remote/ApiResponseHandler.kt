@@ -1,4 +1,4 @@
-package com.example.postdetailssample.repository
+package com.example.postdetailssample.service.remote
 
 import android.accounts.NetworkErrorException
 import retrofit2.HttpException
@@ -8,9 +8,7 @@ object ApiResponseHandler {
 
     fun <T> process(response: Response<T>): T {
         return if (response.isSuccessful) {
-            response.body()?.let {
-                return it
-            } ?: throw NetworkErrorException("Response is null")
+            response.body() ?: throw NetworkErrorException("Response is null")
         } else {
             throw HttpException(response)
         }

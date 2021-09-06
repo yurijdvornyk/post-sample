@@ -1,6 +1,8 @@
-package com.example.postdetailssample.repository
+package com.example.postdetailssample.repository.remote
 
 import com.example.postdetailssample.model.SampleUser
+import com.example.postdetailssample.service.remote.ApiResponseHandler
+import com.example.postdetailssample.repository.UserRepository
 import com.example.postdetailssample.service.remote.ApiService
 import javax.inject.Inject
 

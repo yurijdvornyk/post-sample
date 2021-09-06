@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.postdetailssample.model.SamplePost
 import com.example.postdetailssample.model.SampleUser
-import com.example.postdetailssample.repository.RemotePostsRepository
-import com.example.postdetailssample.repository.RemoteUserRepository
+import com.example.postdetailssample.repository.remote.RemotePostsRepository
+import com.example.postdetailssample.repository.remote.RemoteUserRepository
 import com.example.postdetailssample.repository.local.LocalPostsRepository
 import com.example.postdetailssample.repository.local.LocalUserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
